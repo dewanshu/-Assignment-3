@@ -9,13 +9,24 @@ class PolynomialSolver:
 		for i in range(1,n+1):
 			k+=i*L[i]*(val**(i-1))
 		return k
-
-
-
-
-
-
-if(method=='secant'):
+	def solve(self,n,L,method):
+		if(method=='bisection'):
+			print("Enter lower bound of root interval")
+			l=int(input())
+			print("Enter upper bound of root interval")
+			u=int(input())
+			print("Enter max of itertions")
+			it=int(input())
+			while(abs(self.F(n,L,l)-self.F(n,L,u))>0.00001 and it>0):
+				m=(l+u)/2
+				if(self.F(n,L,l)*self.F(n,L,m)<0):
+					u=m
+				else:
+					l=m
+				print (l,u,self.F(n,L,l),self.F(n,L,u))
+				it-=1
+			return([l,u])
+		if(method=='secant'):
 			print("Enter lower bound of interval in which root lies")
 			l=int(input())
 			print("Enter upper bound of interval in which root lies")
@@ -49,10 +60,7 @@ if(method=='secant'):
 				print (m)
 				it-=1
 			return(l)
-
-
-
-if(method=='newtonraphson'):
+		if(method=='newtonraphson'):
 			print("Enter lower bound of interval in which root lies")
 			l=int(input())
 			print("Enter maximum number of itertions")
@@ -62,23 +70,3 @@ if(method=='newtonraphson'):
 			return(l)
 		else:
 			return NULL
-
-
-
-def solve(self,n,L,method):
-		if(method=='bisectionsearch'):
-			print("Enter lower bound of interval in which root lies")
-			l=int(input())
-			print("Enter upper bound of interval in which root lies")
-			u=int(input())
-			print("Enter maximum number of itertions")
-			it=int(input())
-			while(abs(self.F(n,L,l)-self.F(n,L,u))>0.00001 and it>0):
-				m=(l+u)/2
-				if(self.F(n,L,l)*self.F(n,L,m)<0):
-					u=m
-				else:
-					l=m
-				print (l,u,self.F(n,L,l),self.F(n,L,u))
-				it-=1
-			return([l,u])
