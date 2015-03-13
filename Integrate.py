@@ -1,44 +1,32 @@
+__author__ = 'Mayank'
 class Integrate:
-	def solve(self,order,coeffs,method):
-		def f(x):
-			sum=0
-			for i in range(order+1):
-				sum+=(coeffs[i]*(x**(order-i)))
-			return sum
-		if method=='TrapezoidalRule':
-			a=float(input('enter the lower limit of interval: '))
-			b=float(input('enter the upper limit of interval: '))
-			n=int((b-a)/0.001)
-			x_values=[a]
-			for i in range(1,n):
-				x_values.append(float(str(x_values[0]+(0.001*i))[:5]))
-			x_values.append(b)
-			def trapezoid_solution(f,x_values,n):
-				sum=0
-				for i in range(1,n):
-					sum+=f(x_values[i])
-				sum*=2
-				sum+=(f(x_values[0])+f(x_values[n]))
-				ans=((x_values[n]-x_values[0])*sum)/(2*n)
-				return ans
-			return trapezoid_solution(f,x_values,n)
-		elif method=='SimpsonsRule':
-			a=float(input('enter the lower limit of interval: '))
-			b=float(input('enter the upper limit of interval: '))
-			n=int((b-a)/0.0005) #0.0005 instead of 0.001 to ensure n is even
-			x_values=[a]
-			for i in range(1,n):
-				x_values.append(float(str(x_values[0]+(0.0005*i)[:5]))
-			x_values.append(b)
-			def simpson_solution(f,x_values,n):
-				sum1,sum2,sum=0,0,0
-				for i in range(1,n,2):
-					sum1+=f(x_values[i])
-				sum1*=4
-				for i in range(2,n,2):
-					sum2+=f(x_values[i])
-				sum2*=2
-				sum+=(f(x_values[0])+f(x_values[n])+sum1+sum2)
-				ans=((x_values[n]-x_values[0])*sum)/(3*n)
-				return ans
-			return simpson_solution(f,x_values,n)
+    def __init__(self):
+        self.l=[]
+        self.s=0
+        self.even_s=0
+    def solve(self, a, b, n, f, method):
+        if method is 'TrapezoidalRule':
+                for i in range(n+1):
+                    self.l.append(a+((b-a)*i)/n)
+                for j in range(0, n+1):
+                    if j is 0 or j is n:
+                        self.s=self.s+f(self.l[j])
+                    else:
+                        self.s=self.s+2*f(self.l[j])
+                return ((b-a)*(self.s))/(2*n)
+        elif method is 'SimpsonsRule':
+                for i in range(2*n+1):
+                    self.l.append(a+((b-a)*i)/(2*n))
+                for j in range(1, n+1):
+                    self.s=self.s+f(self.l[2*j-1])
+                for g in range(2, n+1):
+                    self.even_s=self.even_s+f(self.l[2*g-2])
+                return ((b-a)*(f(self.l[0])+f(self.l[2*n])+4*self.s+2*self.even_s))/(6*n)
+#example
+#def f(x):
+ #   return 2*x
+
+#p=Integrate()
+#k=p.solve(1,5,10,f,'SimpsonsRule')
+#print(k)
+#ouput is: 24.0
