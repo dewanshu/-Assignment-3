@@ -1,3 +1,20 @@
+class PolynomialSolver:
+	def F(self,n,L,val):
+		k=0
+		for i in range(n+1):
+			k+=L[i]*(val**i)
+		return k
+	def Fder(self,n,L,val):
+		k=0
+		for i in range(1,n+1):
+			k+=i*L[i]*(val**(i-1))
+		return k
+
+
+
+
+
+
 if(method=='secant'):
 			print("Enter lower bound of interval in which root lies")
 			l=int(input())
