@@ -1,4 +1,12 @@
- def Lagrange(self,L,M):                                                
+class Interpolate:
+    
+    def solve(self,L,M,method):
+        if(method=="newton"):
+            return (self.Newton(L,M))
+        else:
+            return (self.Lagrange(L,M))
+
+    def Lagrange(self,L,M):                                                
        
         
         from numpy import array
@@ -11,7 +19,7 @@
         derivative=P.polyder(w)                                             
         for i in range(n):
             result+=(P.polydiv(w,(-1*L[i],1))[0]*M[i])/P.polyval(L[i],derivative)   
-        return(list(result))  
+        return(list(result))                                                
     def Newton(self,L,M):                                                   
        
         
@@ -31,4 +39,9 @@
             for j in range(1,i):
                 prod=P.polymul(prod,(-1*L[j],1))                              
             result=P.polyadd(result,array(prod)*mat[0][i])                  
-        return (list(result))       
+        return (list(result))                                               
+
+apx=Interpolate()                                                          
+for method in ["newton","lagrange"]:
+    solution=apx.solve([1,2,3],[0,-1,0],method)
+    print(solution)
