@@ -32,3 +32,16 @@ if(method=='secant'):
 				print (m)
 				it-=1
 			return(l)
+
+
+
+if(method=='newtonraphson'):
+			print("Enter lower bound of interval in which root lies")
+			l=int(input())
+			print("Enter maximum number of itertions")
+			it=int(input())
+			while(abs(self.F(n,L,l))>0.00001 and it>0):
+				l=l-self.F(n,L,l)/self.Fder(n,L,l)
+			return(l)
+		else:
+			return NULL
