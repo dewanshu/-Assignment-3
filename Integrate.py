@@ -15,3 +15,15 @@ def trapezoid_solution(f,x_values,n):
 			for i in range(1,n):
 				x_values.append(float(str(x_values[0]+(0.0005*i)[:5]))
 			x_values.append(b)
+def simpson_solution(f,x_values,n):
+				sum1,sum2,sum=0,0,0
+				for i in range(1,n,2):
+					sum1+=f(x_values[i])
+				sum1*=4
+				for i in range(2,n,2):
+					sum2+=f(x_values[i])
+				sum2*=2
+				sum+=(f(x_values[0])+f(x_values[n])+sum1+sum2)
+				ans=((x_values[n]-x_values[0])*sum)/(3*n)
+				return ans
+			return simpson_solution(f,x_values,n)
