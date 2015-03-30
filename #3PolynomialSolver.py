@@ -1,3 +1,4 @@
+'''
 class PolynomialSolver:
 	def F(self,n,L,val):
 		k=0
@@ -70,3 +71,43 @@ class PolynomialSolver:
 			return(l)
 		else:
 			return NULL
+'''
+import matplotlib.pyplot as plt
+import numpy as np
+def poly_plot(p,q,u):
+    min_range,max_range=q,u
+    func=lambda x: sum([(x**(len(p)-p.index(i)-1))*i for i in p])
+    w=0.001
+    plot_point,y=[],[]#y will have f(x) points to help trace curve
+    lowlim,uplim=[q],[u]
+    while u-q>w:
+          m=(q+u)/2.0
+    if func(m)*func(l)<=0:
+          u=m
+          uplim.append(u)
+    else:
+          q=m
+          lowlim.append(q)
+
+    point=lowlim+uplim
+    #point list contains point to be located on x axis
+    
+    for i in point:
+          plot_point.append(func(i))#points to be located on curve ie f(x) will be in plot_point
+    #now,we plot curve
+    #print(plot_point)
+    x=np.arange(min_range-0.2,max_range+0.3,0.01)
+    for j in x:
+          y.append(func(j))
+    plt.plot(x,y,'k-')
+    #plt.legend([pl1],('root point'),'best')
+    plt.plot(point,plot_point,'bo')
+    pl1=plt.plot(m,func(m),'ro')
+    plt.title('finding roots by Bisection Method')
+    plt.x('X-Axis')
+    plt.y('Y-Axis')
+    plt.show()
+        
+        
+        
+   
