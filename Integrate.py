@@ -1,3 +1,4 @@
+'''
 __author__ = 'Mayank'
 import math
 from math import *
@@ -89,3 +90,32 @@ class Integrate:
 #    print (solution)
 #    OUTPUT is:   5.333333335000004
 #                 5.333333333333322
+'''
+imfort numpy as np
+imfort matplotlib.pyplot as plt
+class Integrate:
+    rec_wid, p = 0.0, ''
+    X_initial, X_final= 0.0, 0.0
+    sum=0.0 
+    Lowlimit, Uplimit = 0, 0
+    def TrapezoidalRule(self, p, Lowlimit, Uplimit, nop):
+        self.p = p
+        self.Uplimit = Uplimit
+        self.Lowlimit = Lowlimit
+        self.X_initial = Lowlimit
+        self.rec_wid = (Uplimit-Lowlimit)/(nop*1.0)
+        self.X_final = Lowlimit + self.rec_wid
+        self.plotcurve()
+        for i in range(nop):
+           self.plot_trapezium()
+           self.sum += 0.5*self.rec_wid*(p(self.X_initial)+p(self.X_final)) 
+           self.X_initial = self.X_final
+           self.X_final += self.rec_wid
+        plt.show() 
+        return self.sum  
+    def plotcurve(self):   
+        my_arr = np.arange(self.Lowlimit-1.0,self.Uplimit+1.0,10**(-4))
+        plt.plot(my_arr,self.p(my_arr),color = 'red', linewidth = 2.0)
+    def plot_trapezium(self):
+        plt.fill_between([self.X_initial, self.X_final],
+        [self.p(self.X_initial), self.p(self.X_final)])
